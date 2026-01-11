@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brew Logic Daily</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111">
+<meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+
+<body style="font-family:system-ui;padding:16px">
+<h2>☕ Brew Logic Daily</h2>
+
+<button onclick="save()">Save Brew</button>
+<div id="history"></div>
+
+<script>
+function save(){
+  let h = JSON.parse(localStorage.getItem("brewlog") || "[]");
+  h.unshift(new Date().toLocaleString());
+  localStorage.setItem("brewlog", JSON.stringify(h));
+  render();
+}
+function render(){
+  let h = JSON.parse(localStorage.getItem("brewlog") || "[]");
+  history.innerHTML = "<b>History</b><br>" + h.slice(0,5).join("<br>");
+}
+render();
+</script>
+</body>
+</html>
